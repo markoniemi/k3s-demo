@@ -1,0 +1,33 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: user-application
+spec:
+  selector:
+      matchLabels:
+        app: user-application
+  replicas: 1
+  template:
+    metadata:
+      labels:
+        app: user-application
+    spec:
+      containers:
+        - name: user-application
+          image: markoniemi/user-application:latest
+          imagePullPolicy: Never
+          ports:
+          - containerPort: 8083
+---
+kind: Service
+apiVersion: v1
+metadata:
+  name: user-application
+spec:
+  selector:
+    app: user-application
+  ports:
+  - protocol: TCP
+    port: 8083
+    nodePort: 30083
+  type: NodePort

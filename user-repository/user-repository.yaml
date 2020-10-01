@@ -1,0 +1,33 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: user-repository
+spec:
+  selector:
+      matchLabels:
+        app: user-repository
+  replicas: 1
+  template:
+    metadata:
+      labels:
+        app: user-repository
+    spec:
+      containers:
+        - name: user-repository
+          image: markoniemi/user-repository:latest
+          imagePullPolicy: Never
+          ports:
+          - containerPort: 8082
+---
+kind: Service
+apiVersion: v1
+metadata:
+  name: user-repository
+spec:
+  selector:
+    app: user-repository
+  ports:
+  - protocol: TCP
+    port: 8082
+    nodePort: 30082
+  type: NodePort

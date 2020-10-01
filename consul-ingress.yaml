@@ -1,7 +1,6 @@
 apiVersion: extensions/v1beta1
 kind: Ingress
 metadata:
-  namespace: consul
   name: consul-ingress
 spec:
   rules:
