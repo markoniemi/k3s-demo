@@ -79,7 +79,7 @@
   </profiles>
   <dependencies>
     <dependency>
-      <groupId>org.traefik.demo</groupId>
+      <groupId>org.k3s.demo</groupId>
       <artifactId>user-api</artifactId>
       <version>${project.version}</version>
     </dependency>
