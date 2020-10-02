@@ -1,3 +1,7 @@
+# Sync services with Kubernetes
+syncCatalog:
+  enabled: true
+  
 # Enable the Consul Web UI via a NodePort
 ui:
   service:
@@ -17,3 +21,4 @@ server:
   disruptionBudget:
     enabled: true
     maxUnavailable: 0
+    
