@@ -22,7 +22,7 @@ spec:
             - name: runtime.environment
               valueFrom:
                 configMapKeyRef:
-                  key: runtime_environment
+                  key: runtime.environment
                   name: user-application
 ---
 kind: Service
@@ -57,4 +57,4 @@ kind: ConfigMap
 metadata:
   name: user-application
 data:
-  runtime_environment: kubernetes
+  runtime.environment: kubernetes
