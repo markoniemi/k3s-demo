@@ -5,13 +5,10 @@
 1. install docker
 2. install kubectl
 3. install k3d
-    
+  
 ## Create cluster, install Traefik, Consul, Portainer
 
     ./create_cluster.sh
-
-
-1. Connect to local Kubernetes, set Endpoint URL: kubernetes.default.svc
 
 ### Verify installation
 
@@ -19,9 +16,23 @@
 
 Wait until all pods are running
 
-    kubectl port-forward $(kubectl get pods --selector "app.kubernetes.io/name=traefik" --output=name) 8080:9000
-    kubectl -n consul port-forward service/consul-ui 8500:80
+ * Portainer: [http://localhost:9000](http://localhost:9000)
+ * Consul: [http://localhost/ui](http://localhost/ui)
+ * Traefik: [http://localhost/dashboard/](http://localhost/dashboard/) trailing slash is important
 
-Portainer: [http://localhost:9000](http://localhost:9000)
-Consul: [http://localhost:8500](http://localhost:8500)
-Traefik: [http://localhost:8080](http://localhost:8080)
+## Build services
+
+    ./build.sh
+    
+## Install applications
+
+    ./install_applications.sh
+    
+If something goes wrong, just delete the cluster and start again.
+
+    k3d cluster delete k3s-default
+    
+## Verify installation
+
+User-application: [http://localhost/users](http://localhost/users) login with admin/admin
+
