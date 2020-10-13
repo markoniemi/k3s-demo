@@ -6,7 +6,7 @@ spec:
   selector:
       matchLabels:
         app: user-application
-  replicas: 2
+  replicas: 1
   template:
     metadata:
       labels:
@@ -24,6 +24,19 @@ spec:
                 configMapKeyRef:
                   key: runtime.environment
                   name: user-application
+          livenessProbe:
+            httpGet:
+              path: /users/actuator/health/liveness
+              port: 8083
+            initialDelaySeconds: 10
+            periodSeconds: 3                
+          readinessProbe:
+            httpGet:
+              path: /users/actuator/health/readiness
+              port: 8083
+            initialDelaySeconds: 10
+            periodSeconds: 3                
+            failureThreshold: 2
 ---
 kind: Service
 apiVersion: v1
@@ -35,8 +48,7 @@ spec:
   ports:
   - protocol: TCP
     port: 8083
-    nodePort: 30083
-  type: NodePort
+  type: LoadBalancer
 ---
 kind: IngressRoute
 apiVersion: traefik.containo.us/v1alpha1
@@ -47,7 +59,7 @@ spec:
     - web
   routes:
     - kind: Rule
-      match: PathPrefix(`/users`)
+      match: PathPrefix(`/users`,`/actuator`)
       services:
         - name: user-application
           port: 8083

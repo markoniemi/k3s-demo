@@ -29,6 +29,19 @@ spec:
               secretKeyRef:
                 name: user-repository
                 key: DB_PASSWORD
+          livenessProbe:
+            httpGet:
+              path: /actuator/health/liveness
+              port: 8082
+            initialDelaySeconds: 30
+            periodSeconds: 3                
+          readinessProbe:
+            httpGet:
+              path: /actuator/health/readiness
+              port: 8082
+            initialDelaySeconds: 30
+            periodSeconds: 3                
+            failureThreshold: 2
 ---
 kind: Service
 apiVersion: v1
@@ -40,8 +53,7 @@ spec:
   ports:
   - protocol: TCP
     port: 8082
-    nodePort: 30082
-  type: NodePort
+  type: ClusterIP
 ---
 kind: Secret
 apiVersion: v1
