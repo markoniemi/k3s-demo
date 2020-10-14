@@ -10,16 +10,18 @@ import lombok.extern.log4j.Log4j2;
 
 @Log4j2
 public class DatabaseInitializer {
-    @Resource
-    private UserRepository userRepository;
+	@Resource
+	private UserRepository userRepository;
 
-    @PostConstruct
-    public void initialize() {
-        log.debug("DatabaseInitializer.initialize");
-        try {
-            userRepository.save(new User("admin", "admin", "admin@test.com", Role.ROLE_ADMIN));
-        } catch (Exception e) {
-            log.error(e.getMessage(), e);
-        }
-    }
+	@PostConstruct
+	public void initialize() {
+		try {
+			if (userRepository.findByUsername("admin") == null) {
+				log.debug("DatabaseInitializer.initialize");
+				userRepository.save(new User("admin", "admin", "admin@test.com", Role.ROLE_ADMIN));
+			}
+		} catch (Exception e) {
+			log.error(e.getMessage(), e);
+		}
+	}
 }
