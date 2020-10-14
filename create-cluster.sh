@@ -1,4 +1,4 @@
-k3d cluster create k3s-default --servers 2 --k3s-server-arg "--no-deploy=traefik" -p 80:80@loadbalancer -p 8500:8500@loadbalancer -p 9000:9000@loadbalancer -p 8080:8080@loadbalancer -p 8082:8082@loadbalancer -p 8083:8083@loadbalancer
+k3d cluster create k3s-default -i docker.io/rancher/k3s:v1.19.2-k3s1 --servers 2 --k3s-server-arg "--no-deploy=traefik" -p 80:80@loadbalancer -p 8500:8500@loadbalancer -p 9000:9000@loadbalancer -p 8080:8080@loadbalancer -p 8082:8082@loadbalancer -p 8083:8083@loadbalancer
 k3d kubeconfig merge k3s-default --switch-context
 
 helm repo add traefik https://containous.github.io/traefik-helm-chart

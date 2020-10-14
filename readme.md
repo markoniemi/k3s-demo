@@ -4,7 +4,7 @@
 
 1. install docker
 2. install kubectl
-3. install k3d
+3. install k3d > 3.1.3
   
 ## Create cluster, install Traefik, Consul, Portainer
 
