@@ -48,10 +48,10 @@ spec:
   ports:
   - protocol: TCP
     port: 8083
-  type: LoadBalancer
+  type: NodePort
 ---
 kind: Ingress
-apiVersion: networking.k8s.io/v1beta1
+apiVersion: networking.k8s.io/v1
 metadata:
   name: user-application-ingress
 spec:
@@ -61,15 +61,19 @@ spec:
       - path: /users
         pathType: Prefix
         backend:
-          serviceName: user-application
-          servicePort: 8083
+          service:
+            name: user-application
+            port:
+              number: 8083
   - http:
       paths:
       - path: /actuator
         pathType: Prefix
         backend:
-          serviceName: user-application
-          servicePort: 8083
+          service:
+            name: user-application
+            port:
+              number: 8083
 ---
 kind: ConfigMap
 apiVersion: v1
