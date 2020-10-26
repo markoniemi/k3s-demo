@@ -65,15 +65,6 @@ spec:
             name: user-application
             port:
               number: 8083
-  - http:
-      paths:
-      - path: /actuator
-        pathType: Prefix
-        backend:
-          service:
-            name: user-application
-            port:
-              number: 8083
 ---
 kind: ConfigMap
 apiVersion: v1

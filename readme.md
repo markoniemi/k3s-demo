@@ -18,7 +18,8 @@ Wait until all pods are running
 
  * Portainer: [http://localhost:9000](http://localhost:9000)
  * Consul: [http://localhost/ui](http://localhost/ui)
- * Traefik: [http://localhost/dashboard/](http://localhost/dashboard/) trailing slash is important
+
+<span style="color:grey"> * Traefik: [http://localhost/dashboard/](http://localhost/dashboard/) trailing slash is important</span>
 
 ## Build services
 
@@ -26,7 +27,8 @@ Wait until all pods are running
     
 ## Install applications
 
-    ./install_applications.sh
+    ./user-repository/run-k8s.sh
+    ./user-application/run-k8s.sh
     
 If something goes wrong, just delete the cluster and start again.
 
