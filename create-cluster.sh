@@ -1,5 +1,14 @@
 # create cluster
-k3d cluster create k3s-default -i docker.io/rancher/k3s:v1.19.2-k3s1 --servers 2 --k3s-server-arg "--no-deploy=traefik" -p 80:80@loadbalancer -p 8500:8500@loadbalancer -p 9000:9000@loadbalancer -p 8080:8080@loadbalancer -p 8082:8082@loadbalancer -p 8083:8083@loadbalancer
+k3d cluster create k3s-default \
+  -i docker.io/rancher/k3s:v1.19.2-k3s1 \
+  --servers 2 \
+  --k3s-server-arg "--no-deploy=traefik" \
+  -p 80:80@loadbalancer \
+  -p 8500:8500@loadbalancer \
+  -p 9000:9000@loadbalancer \
+  -p 8080:8080@loadbalancer \
+  -p 8083:8083@loadbalancer
+#  -p 8082:8082@loadbalancer \
 k3d kubeconfig merge k3s-default --switch-context
 
 # create user
@@ -25,4 +34,4 @@ kubectl create namespace portainer
 helm install -n portainer portainer portainer/portainer --set service.type=LoadBalancer
 
 # Postgre
-helm install postgresql bitnami/postgresql -f postgresql-helm-values.yaml
+#helm install postgresql bitnami/postgresql -f postgresql-helm-values.yaml

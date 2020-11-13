@@ -1,3 +1,8 @@
 postgresqlDatabase: postgres
 postgresqlUsername: postgres
 postgresqlPassword: mysecretpassword
+
+#service.nodePort: 30432
+#service.type: LoadBalancer
+#service.loadBalancerIP
+#service.loadBalancerSourceRanges: *

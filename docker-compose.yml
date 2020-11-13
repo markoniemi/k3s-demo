@@ -1,0 +1,21 @@
+version: '2'
+services:
+  user-repository:
+    image: markoniemi/user-repository
+    environment:
+      - DB_HOST=${DB_HOST}
+      - DB_PASSWORD=${DB_PASSWORD}
+    network_mode: host
+  user-application:
+    image: markoniemi/user-application
+    ports:
+      - 8083:8083
+    network_mode: host
+  postgres:
+    image: postgres:12-alpine
+    restart: always
+    environment:
+      POSTGRES_PASSWORD: ${DB_PASSWORD}
+    ports:
+      - 5432:5432
+    network_mode: host
