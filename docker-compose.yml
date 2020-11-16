@@ -5,12 +5,15 @@ services:
     environment:
       - DB_HOST=${DB_HOST}
       - DB_PASSWORD=${DB_PASSWORD}
-    network_mode: host
-  user-application:
-    image: markoniemi/user-application
+      - SPRING_PROFILES_ACTIVE=local
     ports:
-      - 8083:8083
-    network_mode: host
+      - 8082:8082
+#    network_mode: host
+#  user-application:
+#    image: markoniemi/user-application
+#    ports:
+#      - 8083:8083
+#    network_mode: host
   postgres:
     image: postgres:12-alpine
     restart: always
@@ -18,4 +21,4 @@ services:
       POSTGRES_PASSWORD: ${DB_PASSWORD}
     ports:
       - 5432:5432
-    network_mode: host
+#    network_mode: host

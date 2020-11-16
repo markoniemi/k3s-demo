@@ -4,11 +4,12 @@ metadata:
   name: user-repository
 spec:
 #  type: ExternalName
-#  externalName: 172.26.139.99
+#  externalName: 172.20.0.1
   type: ClusterIP
   ports:
     - port: 8082
-      targetPort: 8082  
+      targetPort: 8082
+      name: user-repository
 ---
 kind: Endpoints
 apiVersion: v1
@@ -16,6 +17,7 @@ metadata:
   name: user-repository
 subsets:
   - addresses:
-      - ip: 172.26.139.99
+      - ip: 172.20.0.1
     ports:
       - port: 8082
+        name: user-repository
