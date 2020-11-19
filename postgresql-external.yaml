@@ -1,20 +1,20 @@
 kind: Service
 apiVersion: v1
 metadata:
-  name: user-repository
+  name: postgresql
 spec:
   type: ClusterIP
   ports:
-    - port: 8082
-      name: user-repository
+    - port: 5432
+      name: postgresql
 ---
 kind: Endpoints
 apiVersion: v1
 metadata:
-  name: user-repository
+  name: postgresql
 subsets:
   - addresses:
       - ip: 172.20.0.1
     ports:
-      - port: 8082
-        name: user-repository
+      - port: 5432
+        name: postgresql

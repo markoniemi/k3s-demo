@@ -13,7 +13,7 @@ services:
 #    ports:
 #      - 8083:8083
 #    network_mode: host
-  postgres:
+  postgresql:
     image: postgres:12-alpine
     restart: always
     environment:

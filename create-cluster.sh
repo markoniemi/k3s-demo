@@ -34,4 +34,8 @@ kubectl create namespace portainer
 helm install -n portainer portainer portainer/portainer --set service.type=LoadBalancer
 
 # Postgre
+# use postgresql in cluster
 #helm install postgresql bitnami/postgresql -f postgresql-helm-values.yaml
+# use postgresql outside of cluster
+kubectl apply -f postgresql-external.yaml
+docker-compose up -d postgresql
