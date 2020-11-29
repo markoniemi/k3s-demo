@@ -1,0 +1,14 @@
+apiVersion: kustomize.config.k8s.io/v1beta1
+kind: Kustomization
+resources:
+- deployment.yaml
+- service.yaml
+- ingress.yaml
+- secret.yaml
+commonLabels:
+  app: user-repository
+#  app.kubernetes.io/name: user-repository
+#  app.kubernetes.io/instance: user-repository-0.1
+#  app.kubernetes.io/version: "0.1"
+#  app.kubernetes.io/part-of: user-repository
+#  app.kubernetes.io/managed-by: kubectl

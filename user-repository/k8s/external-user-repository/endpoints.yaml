@@ -1,0 +1,11 @@
+# ip changes, shell into a container and nslookup host.k3d.internal 
+kind: Endpoints
+apiVersion: v1
+metadata:
+  name: user-repository
+subsets:
+  - addresses:
+      - ip: 172.19.0.1
+    ports:
+      - port: 8082
+        name: user-repository
