@@ -1,0 +1,15 @@
+kind: Ingress
+apiVersion: networking.k8s.io/v1
+metadata:
+  name: user-application-ingress
+spec:
+  rules:
+  - http:
+      paths:
+      - path: /users
+        pathType: Prefix
+        backend:
+          service:
+            name: user-application
+            port:
+              number: 8083

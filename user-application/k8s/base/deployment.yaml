@@ -37,38 +37,3 @@ spec:
             initialDelaySeconds: 10
             periodSeconds: 3                
             failureThreshold: 2
----
-kind: Service
-apiVersion: v1
-metadata:
-  name: user-application
-spec:
-  selector:
-    app: user-application
-  ports:
-  - protocol: TCP
-    port: 8083
-  type: NodePort
----
-kind: Ingress
-apiVersion: networking.k8s.io/v1
-metadata:
-  name: user-application-ingress
-spec:
-  rules:
-  - http:
-      paths:
-      - path: /users
-        pathType: Prefix
-        backend:
-          service:
-            name: user-application
-            port:
-              number: 8083
----
-kind: ConfigMap
-apiVersion: v1
-metadata:
-  name: user-application
-data:
-  runtime.environment: kubernetes

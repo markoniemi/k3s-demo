@@ -1,11 +1,11 @@
 kind: Service
 apiVersion: v1
 metadata:
-  name: user-repository
+  name: user-application
 spec:
   selector:
-    app: user-repository
+    app: user-application
   ports:
   - protocol: TCP
-    port: 8082
-  type: LoadBalancer
+    port: 8083
+  type: ClusterIP
