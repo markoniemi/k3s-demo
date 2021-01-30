@@ -1,0 +1,25 @@
+apiVersion: k3d.io/v1alpha1
+kind: Simple
+servers: 1
+image: docker.io/rancher/k3s:v1.19.4-k3s1
+ports:
+  - port: 80:80
+    nodeFilters:
+      - loadbalancer
+  - port: 9000:9000
+    nodeFilters:
+      - loadbalancer
+  - port: 8080:8080
+    nodeFilters:
+      - loadbalancer
+  - port: 8082:8082
+    nodeFilters:
+      - loadbalancer
+options:
+  k3s:
+    serverArgs:
+      - --no-deploy=traefik
+  kubeconfig:
+    updateDefaultKubeconfig: true
+    switchCurrentContext: true
+    

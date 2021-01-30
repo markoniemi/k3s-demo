@@ -1,6 +1,6 @@
 echo create cluster
 k3d cluster create k3s-default \
-  -i docker.io/rancher/k3s:v1.19.4-k3s1 \
+  -i docker.io/rancher/k3s:v1.20.2-k3s1 \
   --servers 1 \
   --k3s-server-arg "--no-deploy=traefik" \
   -p 80:80@loadbalancer \
@@ -9,7 +9,7 @@ k3d cluster create k3s-default \
   -p 8080:8080@loadbalancer \
   -p 8082:8082@loadbalancer 
 echo set kubeconfig
-k3d kubeconfig merge k3s-default --switch-context
+k3d kubeconfig merge k3s-default --kubeconfig-switch-context
 
 echo create user
 kubectl apply -f default-user-role.yaml
@@ -18,7 +18,6 @@ echo add repos
 helm repo add portainer https://portainer.github.io/k8s/
 helm repo add bitnami https://charts.bitnami.com/bitnami
 helm repo add ingress-nginx https://kubernetes.github.io/ingress-nginx
-helm repo add stable https://kubernetes-charts.storage.googleapis.com/
 helm repo update
 
 echo install Nginx
