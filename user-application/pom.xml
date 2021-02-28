@@ -4,7 +4,7 @@
   xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
   <modelVersion>4.0.0</modelVersion>
   <artifactId>user-application</artifactId>
-  <packaging>war</packaging>
+<!--   <packaging>war</packaging> -->
   <parent>
     <groupId>org.k3s.demo</groupId>
     <artifactId>k3s-traefik-consul-demo</artifactId>
@@ -44,42 +44,57 @@
       <build>
         <plugins>
           <plugin>
-            <groupId>org.apache.maven.plugins</groupId>
-            <artifactId>maven-dependency-plugin</artifactId>
-            <executions>
-              <execution>
-                <id>unpack</id>
-                <phase>package</phase>
-                <goals>
-                  <goal>unpack</goal>
-                </goals>
-                <configuration>
-                  <artifactItems>
-                    <artifactItem>
-                      <groupId>${project.groupId}</groupId>
-                      <artifactId>${project.artifactId}</artifactId>
-                      <version>${project.version}</version>
-                      <type>war</type>
-                    </artifactItem>
-                  </artifactItems>
-                </configuration>
-              </execution>
-            </executions>
-          </plugin>
-          <plugin>
-            <groupId>com.spotify</groupId>
-            <artifactId>dockerfile-maven-plugin</artifactId>
-            <version>1.4.13</version>
+            <groupId>com.google.cloud.tools</groupId>
+            <artifactId>jib-maven-plugin</artifactId>
+            <version>2.7.1</version>
             <executions>
               <execution>
                 <phase>package</phase>
                 <goals>
-                  <goal>build</goal>
+                  <goal>buildTar</goal>
                 </goals>
               </execution>
             </executions>
+<!--             <dependencies> -->
+<!--               <dependency> -->
+<!--                 <groupId>com.google.cloud.tools</groupId> -->
+<!--                 <artifactId>jib-ownership-extension-maven</artifactId> -->
+<!--                 <version>0.1.0</version> -->
+<!--               </dependency> -->
+<!--             </dependencies> -->
             <configuration>
-              <repository>${docker.image.prefix}/${project.artifactId}</repository>
+<!--               <from> -->
+<!--               <image>openjdk:8-jdk-alpine</image> -->
+<!--               </from> -->
+              <to>
+                <image>${docker.image.prefix}/${project.artifactId}</image>
+              </to>
+              <container>
+<!--                 <user>${project.artifactId}:${project.artifactId}</user> -->
+                <ports>8083</ports>
+                <environment>
+                  <CONSUL_HOST>consul</CONSUL_HOST>
+                  <CONSUL_PORT>8500</CONSUL_PORT>
+                  <VERSION>v1</VERSION>
+                  <DB_HOST>postgresql</DB_HOST>
+                  <DB_PASSWORD>mysecretpassword</DB_PASSWORD>
+                  <PORT>8083</PORT>
+                </environment>
+              </container>
+<!--               <pluginExtensions> -->
+<!--                 <pluginExtension> -->
+<!--                   <implementation>com.google.cloud.tools.jib.maven.extension.ownership.JibOwnershipExtension</implementation> -->
+<!--                   <configuration -->
+<!--                     implementation="com.google.cloud.tools.jib.maven.extension.ownership.Configuration"> -->
+<!--                     <rules> -->
+<!--                       <rule> -->
+<!--                         <glob>/app/**</glob> -->
+<!--                         <ownership>${project.artifactId}:${project.artifactId}</ownership> -->
+<!--                       </rule> -->
+<!--                     </rules> -->
+<!--                   </configuration> -->
+<!--                 </pluginExtension> -->
+<!--               </pluginExtensions> -->
             </configuration>
           </plugin>
         </plugins>
@@ -123,15 +138,24 @@
     <dependency>
       <groupId>org.springframework.boot</groupId>
       <artifactId>spring-boot-starter-web</artifactId>
-    </dependency>
-    <dependency>
-      <groupId>org.apache.tomcat.embed</groupId>
-      <artifactId>tomcat-embed-jasper</artifactId>
-      <scope>provided</scope>
+      <exclusions>
+        <exclusion>
+          <groupId>org.springframework.boot</groupId>
+          <artifactId>spring-boot-starter-tomcat</artifactId>
+        </exclusion>
+      </exclusions>
     </dependency>
     <dependency>
       <groupId>javax.servlet</groupId>
       <artifactId>jstl</artifactId>
+    </dependency>
+    <dependency>
+      <groupId>org.eclipse.jetty</groupId>
+      <artifactId>apache-jsp</artifactId>
+    </dependency>
+    <dependency>
+      <groupId>org.eclipse.jetty</groupId>
+      <artifactId>apache-jstl</artifactId>
     </dependency>
     <dependency>
       <groupId>org.springframework.boot</groupId>

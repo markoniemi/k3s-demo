@@ -5,5 +5,12 @@ resources:
 - service.yaml
 - ingress.yaml
 - secret.yaml
+- configMap.yaml
+configMapGenerator:
+- name: user-repository
+  behavior: merge
+  files:
+    - application.properties
+    - bootstrap.yml
 commonLabels:
   app: user-repository

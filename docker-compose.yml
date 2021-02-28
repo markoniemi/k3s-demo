@@ -8,10 +8,10 @@ services:
     ports:
       - 8082:8082
 #    network_mode: host
-#  user-application:
-#    image: markoniemi/user-application
-#    ports:
-#      - 8083:8083
+  user-application:
+    image: markoniemi/user-application
+    ports:
+      - 8083:8083
 #    network_mode: host
   postgresql:
     image: postgres:12-alpine

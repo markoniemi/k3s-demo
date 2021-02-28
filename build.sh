@@ -9,3 +9,5 @@ docker run \
 -w /usr/src \
 maven:3.6-jdk-8-alpine \
 mvn package -DskipTests=true -P docker "$@"
+docker load -i user-repository/target/jib-image.tar
+docker load -i user-application/target/jib-image.tar
