@@ -26,13 +26,12 @@ public class UserRestController {
 
 	@GetMapping
 	public User[] findAll() {
-		log.info("get /api/rest/users/v1");
 		return userRepository.findAll().toArray(new User[0]);
 	}
 
 	@PostMapping
 	public User create(@RequestBody User user) {
-		log.trace("create: {}", user);
+        log.trace("create: {}", user);
 		return userRepository.save(user);
 	}
 
@@ -44,27 +43,25 @@ public class UserRestController {
 		databaseUser.setPassword(user.getPassword());
 		databaseUser.setRole(user.getRole());
 		databaseUser.setUsername(user.getUsername());
-		log.trace("update: {}", databaseUser);
+        log.trace("update: {}", databaseUser);
 		return userRepository.save(databaseUser);
 	}
 
 	@DeleteMapping(value = "/{id}")
 	public void delete(@PathVariable("id") Long id) {
-		log.info("delete /api/rest/users/v1/" + id);
 		if (userRepository.existsById(id)) {
 			userRepository.deleteById(id);
 		}
+        log.trace("delete: {}", id);
 	}
 
 	@GetMapping(value = "/{id}")
 	public User findById(@PathVariable("id") Long id) {
-		log.info("get /api/rest/users/v1/" + id);
 		return userRepository.findById(id).orElse(null);
 	}
 
 	@GetMapping(params = "username")
 	public User findByUsername(@RequestParam String username) {
-		log.info("get /api/rest/users/v1/" + username);
 		return userRepository.findByUsername(username);
 	}
 
@@ -80,7 +77,6 @@ public class UserRestController {
 
 	@GetMapping(value = "/count")
 	public long count() {
-		log.info("get /api/rest/users/v1/count");
 		return userRepository.count();
 	}
 }

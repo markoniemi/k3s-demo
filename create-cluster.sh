@@ -34,6 +34,6 @@ helm install -n portainer portainer portainer/portainer --set service.type=LoadB
 # Postgre
 echo install postgresql in cluster
 helm install postgresql bitnami/postgresql -f postgresql-helm-values.yaml
-echo install postgresql outside of cluster
-kubectl apply -f postgresql-external.yaml
-docker-compose up -d postgresql
+#echo install postgresql outside of cluster
+#kubectl apply -f postgresql-external.yaml
+#docker-compose up -d postgresql
