@@ -1,6 +1,6 @@
 echo create cluster
 k3d cluster create k3s-default \
-  -i docker.io/rancher/k3s:v1.20.2-k3s1 \
+  -i docker.io/rancher/k3s:v1.20.4-k3s1 \
   --servers 1 \
   --k3s-server-arg "--no-deploy=traefik" \
   -p 80:80@loadbalancer \
@@ -15,17 +15,14 @@ echo create user
 kubectl apply -f default-user-role.yaml
 
 echo add repos
+helm repo add traefik https://helm.traefik.io/traefik
 helm repo add portainer https://portainer.github.io/k8s/
 helm repo add bitnami https://charts.bitnami.com/bitnami
-helm repo add ingress-nginx https://kubernetes.github.io/ingress-nginx
 helm repo update
 
-echo install Nginx
-helm install ingress-nginx ingress-nginx/ingress-nginx
-
-#echo install Traefik
-#helm install traefik traefik/traefik --set image.tag=v2.3.2
-#kubectl apply -f traefik-ingress.yaml
+echo install Traefik
+helm install traefik traefik/traefik --set image.tag=v2.4.2
+kubectl apply -f traefik-ingress.yaml
 
 echo install Portainer
 kubectl create namespace portainer
