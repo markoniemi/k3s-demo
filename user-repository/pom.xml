@@ -69,22 +69,11 @@
                 </goals>
               </execution>
             </executions>
-            <!-- <dependencies> -->
-            <!-- <dependency> -->
-            <!-- <groupId>com.google.cloud.tools</groupId> -->
-            <!-- <artifactId>jib-ownership-extension-maven</artifactId> -->
-            <!-- <version>0.1.0</version> -->
-            <!-- </dependency> -->
-            <!-- </dependencies> -->
             <configuration>
-              <!-- <from> -->
-              <!-- <image>openjdk:8-jdk-alpine</image> -->
-              <!-- </from> -->
               <to>
                 <image>${docker.image.prefix}/${project.artifactId}</image>
               </to>
               <container>
-                <!-- <user>${project.artifactId}:${project.artifactId}</user> -->
                 <ports>8082</ports>
                 <environment>
                   <CONSUL_HOST>consul</CONSUL_HOST>
@@ -95,38 +84,8 @@
                   <PORT>8082</PORT>
                 </environment>
               </container>
-              <!-- <pluginExtensions> -->
-              <!-- <pluginExtension> -->
-              <!-- <implementation>com.google.cloud.tools.jib.maven.extension.ownership.JibOwnershipExtension</implementation> -->
-              <!-- <configuration -->
-              <!-- implementation="com.google.cloud.tools.jib.maven.extension.ownership.Configuration"> -->
-              <!-- <rules> -->
-              <!-- <rule> -->
-              <!-- <glob>/app/**</glob> -->
-              <!-- <ownership>${project.artifactId}:${project.artifactId}</ownership> -->
-              <!-- </rule> -->
-              <!-- </rules> -->
-              <!-- </configuration> -->
-              <!-- </pluginExtension> -->
-              <!-- </pluginExtensions> -->
             </configuration>
           </plugin>
-          <!-- <plugin> -->
-          <!-- <groupId>com.spotify</groupId> -->
-          <!-- <artifactId>dockerfile-maven-plugin</artifactId> -->
-          <!-- <version>1.4.13</version> -->
-          <!-- <executions> -->
-          <!-- <execution> -->
-          <!-- <phase>package</phase> -->
-          <!-- <goals> -->
-          <!-- <goal>build</goal> -->
-          <!-- </goals> -->
-          <!-- </execution> -->
-          <!-- </executions> -->
-          <!-- <configuration> -->
-          <!-- <repository>${docker.image.prefix}/${project.artifactId}</repository> -->
-          <!-- </configuration> -->
-          <!-- </plugin> -->
         </plugins>
       </build>
     </profile>
@@ -141,14 +100,6 @@
       <groupId>org.springframework.cloud</groupId>
       <artifactId>spring-cloud-starter-kubernetes</artifactId>
     </dependency>
-    <!-- <dependency> -->
-    <!-- <groupId>org.springframework.cloud</groupId> -->
-    <!-- <artifactId>spring-cloud-starter-consul-config</artifactId> -->
-    <!-- </dependency> -->
-    <!-- <dependency> -->
-    <!-- <groupId>org.springframework.cloud</groupId> -->
-    <!-- <artifactId>spring-cloud-starter-consul-discovery</artifactId> -->
-    <!-- </dependency> -->
     <dependency>
       <groupId>org.springframework.retry</groupId>
       <artifactId>spring-retry</artifactId>
