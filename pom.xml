@@ -19,6 +19,7 @@
     <maven.cargo.version>1.6.5</maven.cargo.version>
     <selenium.version>3.13.0</selenium.version>
     <docker.image.prefix>markoniemi</docker.image.prefix>
+    <timestamp>${maven.build.timestamp}</timestamp>
   </properties>
   <modules>
     <module>user-api</module>
@@ -26,6 +27,12 @@
     <module>user-application</module>
   </modules>
   <build>
+    <resources>
+      <resource>
+        <directory>src/main/resources</directory>
+        <filtering>true</filtering>
+      </resource>
+    </resources>
     <plugins>
       <plugin>
         <artifactId>maven-compiler-plugin</artifactId>

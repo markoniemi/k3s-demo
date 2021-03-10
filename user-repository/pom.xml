@@ -9,9 +9,6 @@
     <artifactId>k3s-traefik-consul-demo</artifactId>
     <version>0.1-SNAPSHOT</version>
   </parent>
-  <properties>
-    <docker.image.prefix>markoniemi</docker.image.prefix>
-  </properties>
   <build>
     <plugins>
       <plugin>
