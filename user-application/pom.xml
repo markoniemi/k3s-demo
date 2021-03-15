@@ -7,7 +7,7 @@
 <!--   <packaging>war</packaging> -->
   <parent>
     <groupId>org.k3s.demo</groupId>
-    <artifactId>k3s-traefik-consul-demo</artifactId>
+    <artifactId>k3s-demo</artifactId>
     <version>0.1-SNAPSHOT</version>
   </parent>
   <properties>

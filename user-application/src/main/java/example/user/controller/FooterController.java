@@ -11,9 +11,12 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 public class FooterController {
     @Value("${runtime.environment:dev}")
     private String environment;
+    @Value("${info.app.version:-}")
+    private String version;
 
     @ModelAttribute
     public void setEnvironment(Model model) {
         model.addAttribute("environment", environment);
+        model.addAttribute("version", version);
     }
 }

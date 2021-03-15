@@ -7,6 +7,7 @@
   <div class="footer-text">
     <spring:message code="version" />
     <spring:message code="app.version" />
+    <c:out value="${version}" />
     <spring:message code="username" />
     <c:out value="${username}" />
     <spring:message code="environment" />
