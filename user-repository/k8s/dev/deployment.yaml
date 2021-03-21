@@ -1,0 +1,17 @@
+kind: Deployment
+apiVersion: apps/v1
+metadata:
+  name: user-repository
+spec:
+  template:
+    spec:
+      containers:
+        - name: user-repository
+          ports:
+          - name: http
+            containerPort: 8082
+          - name: debug
+            containerPort: 8582
+          env:
+          - name: JAVA_TOOL_OPTIONS
+            value: "-agentlib:jdwp=transport=dt_socket,server=y,suspend=n,address=0.0.0.0:8582"

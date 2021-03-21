@@ -15,10 +15,16 @@ ports:
   - port: 8082:8082
     nodeFilters:
       - loadbalancer
+  - port: 8582:30082
+    nodeFilters:
+      - server[0]
+  - port: 8583:30083
+    nodeFilters:
+      - server[0]
 options:
   k3s:
     extraServerArgs:
       - --no-deploy=traefik
 kubeAPI:
   hostIP: "127.0.0.1"
-  hostPort: "6550"
+  hostPort: "6443"

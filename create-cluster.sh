@@ -1,3 +1,4 @@
+set -e
 echo create cluster
 k3d cluster create --config k3d-default.yaml
 

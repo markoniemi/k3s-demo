@@ -71,11 +71,11 @@
                 <image>${docker.image.prefix}/${project.artifactId}</image>
               </to>
               <container>
-                <ports>8082</ports>
+                <ports>
+                  <port>8082</port>
+                  <port>8582</port>
+                </ports>
                 <environment>
-                  <CONSUL_HOST>consul</CONSUL_HOST>
-                  <CONSUL_PORT>8500</CONSUL_PORT>
-                  <VERSION>v1</VERSION>
                   <DB_HOST>postgresql</DB_HOST>
                   <DB_PASSWORD>mysecretpassword</DB_PASSWORD>
                   <PORT>8082</PORT>

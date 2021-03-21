@@ -1,3 +1,4 @@
+set -e
 echo install user-repository
 #import from file
 k3d image import user-repository/target/jib-image.tar

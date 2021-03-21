@@ -1,12 +1,15 @@
 kind: Service
 apiVersion: v1
 metadata:
-  name: user-repository
+  name: user-repository-debug
 spec:
-  type: LoadBalancer
+  type: NodePort
   selector:
     app: user-repository
   ports:
     - name: http
       protocol: TCP
-      port: 8082
+      port: 8582
+      nodePort: 30082
+      targetPort: 8582
+      
