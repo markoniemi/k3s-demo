@@ -13,7 +13,7 @@ helm repo add bitnami https://charts.bitnami.com/bitnami
 helm repo update
 
 echo install Traefik
-helm install traefik traefik/traefik --set image.tag=v2.4.2
+helm install traefik traefik/traefik --set image.tag=v2.4.8
 kubectl apply -f traefik-ingress.yaml
 
 # Postgre

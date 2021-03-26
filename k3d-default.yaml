@@ -28,3 +28,6 @@ options:
 kubeAPI:
   hostIP: "127.0.0.1"
   hostPort: "6443"
+registries:
+  create: true
+    
