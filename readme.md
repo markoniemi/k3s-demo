@@ -4,7 +4,9 @@
 
 1. install docker
 2. install kubectl
-3. install k3d > 3.1.3
+3. install k3d > 3.4.0
+4. install lens (optional)
+5. install skaffold (optional)
   
 ## Create cluster, install Traefik, Consul, Portainer
 
@@ -14,12 +16,8 @@
 
     kubectl get pod --all-namespaces
 
-Wait until all pods are running
-
- * Portainer: [http://localhost:9000](http://localhost:9000)
- * Consul: [http://localhost/ui](http://localhost/ui)
-
-<span style="color:grey"> * Traefik: [http://localhost/dashboard/](http://localhost/dashboard/) trailing slash is important</span>
+1. Start Lens, add ~/.kube/config to Lens.
+2. Wait until all pods are running
 
 ## Build services
 
@@ -27,8 +25,8 @@ Wait until all pods are running
     
 ## Install applications
 
-    ./user-repository/run-k8s.sh
-    ./user-application/run-k8s.sh
+    ./user-repository.sh
+    ./user-application.sh
     
 If something goes wrong, just delete the cluster and start again.
 
@@ -36,5 +34,5 @@ If something goes wrong, just delete the cluster and start again.
     
 ## Verify installation
 
-User-application: [http://localhost/users](http://localhost/users) login with admin/admin
-
+user-application: [http://localhost/users](http://localhost/users) login with admin/admin
+user-repository: [http://localhost:8082/api/rest/users/v1]([http://localhost:8082/api/rest/users/v1])

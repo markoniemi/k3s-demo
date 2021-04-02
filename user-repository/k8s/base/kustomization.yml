@@ -12,5 +12,6 @@ configMapGenerator:
   files:
     - application.properties
     - bootstrap.yml
+    - log4j2.xml
 commonLabels:
   app: user-repository
