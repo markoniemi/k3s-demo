@@ -26,6 +26,7 @@ public class UserRestController {
 
 	@GetMapping
 	public User[] findAll() {
+	    log.debug("ping");
 		return userRepository.findAll().toArray(new User[0]);
 	}
 
