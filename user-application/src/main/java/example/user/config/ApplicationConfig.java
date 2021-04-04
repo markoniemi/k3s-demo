@@ -12,6 +12,8 @@ import org.springframework.web.filter.CommonsRequestLoggingFilter;
 import org.springframework.web.servlet.LocaleResolver;
 import org.springframework.web.servlet.i18n.SessionLocaleResolver;
 
+import feign.Retryer;
+
 @Configuration
 @ComponentScan(basePackages = { "example.user" })
 @EnableDiscoveryClient
@@ -32,5 +34,10 @@ public class ApplicationConfig {
     @Bean
     public CommonsRequestLoggingFilter requestLoggingFilter() {
         return new RequestLoggingFilter();
+    }
+
+    @Bean
+    public Retryer retryer() {
+        return new Retryer.Default(100, 1000, 10);
     }
 }

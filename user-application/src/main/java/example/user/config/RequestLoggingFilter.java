@@ -16,7 +16,7 @@ public class RequestLoggingFilter extends CommonsRequestLoggingFilter {
         super.setBeforeMessagePrefix("[");
         super.setIncludeQueryString(true);
         super.setIncludePayload(true);
-        super.setMaxPayloadLength(64000);
+        super.setMaxPayloadLength(512);
     }
 
     @Override
