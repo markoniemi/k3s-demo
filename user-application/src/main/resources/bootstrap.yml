@@ -1,10 +1,10 @@
 spring:
   application:
     name: user-application
-#  cloud:
-#    kubernetes:
-#      config:
-#        enabled: true
-#        name: user-application
-#      reload:
-#        enabled: true
+  cloud:
+    kubernetes:
+      config:
+        enabled: true
+        name: user-application
+      reload:
+        enabled: true
