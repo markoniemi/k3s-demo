@@ -3,7 +3,6 @@ package example;
 import javax.annotation.Resource;
 
 import org.junit.Assert;
-import org.junit.Before;
 import org.junit.Test;
 
 import example.repository.user.Role;
@@ -13,11 +12,6 @@ import example.user.service.UserClient;
 public class UserRestControllerIT extends AbstractIntegrationTestBase {
     @Resource
     UserClient userClient;
-
-    @Before
-    public void setUp() throws InterruptedException {
-        waitForServiceRegistration();
-    }
 
     @Test
     public void users() {

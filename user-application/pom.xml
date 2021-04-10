@@ -4,7 +4,6 @@
   xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
   <modelVersion>4.0.0</modelVersion>
   <artifactId>user-application</artifactId>
-<!--   <packaging>war</packaging> -->
   <parent>
     <groupId>org.k3s.demo</groupId>
     <artifactId>k3s-demo</artifactId>
@@ -33,6 +32,52 @@
             <goals>
               <goal>repackage</goal>
             </goals>
+          </execution>
+        </executions>
+      </plugin>
+      <plugin>
+        <groupId>org.codehaus.mojo</groupId>
+        <artifactId>exec-maven-plugin</artifactId>
+        <version>1.6.0</version>
+        <executions>
+          <execution>
+            <id>user-repository</id>
+            <phase>pre-integration-test</phase>
+            <goals>
+              <goal>exec</goal>
+            </goals>
+            <configuration>
+              <executable>java</executable>
+              <workingDirectory>../user-repository/target</workingDirectory>
+              <async>true</async>
+              <asyncDestroyOnShutdown>true</asyncDestroyOnShutdown>
+              <arguments>
+                <argument>-Dspring.profiles.active=h2</argument>
+                <argument>-jar</argument>
+                <argument>user-repository-0.1-SNAPSHOT.jar</argument>
+              </arguments>
+            </configuration>
+          </execution>
+        </executions>
+      </plugin>
+      <plugin>
+        <groupId>se.thinkcode.wait</groupId>
+        <artifactId>http</artifactId>
+        <version>1.1.0</version>
+        <executions>
+          <execution>
+            <id>wait-user-repository</id>
+            <phase>pre-integration-test</phase>
+            <goals>
+              <goal>wait</goal>
+            </goals>
+            <configuration>
+              <url>http://localhost:8082/actuator/health</url>
+              <timeout>120000</timeout>
+              <headers>
+                <Content-Type>application/json;charset=UTF-8</Content-Type>
+              </headers>
+            </configuration>
           </execution>
         </executions>
       </plugin>

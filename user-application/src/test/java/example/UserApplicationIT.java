@@ -15,7 +15,7 @@ import example.selenium.UsersPage;
 import example.user.service.UserClient;
 
 public class UserApplicationIT extends AbstractIntegrationTestBase {
-    private String loginUrl = "http://localhost:8083/";
+    private String loginUrl = "http://localhost:8083/users";
     @Resource
     private UserClient userService;
     @Resource
