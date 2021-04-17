@@ -42,9 +42,12 @@ public class UserController {
     }
 
     @PostMapping(value = "/user/save")
-    public String saveUser(@ModelAttribute @Validated User user, BindingResult bindingResult) {
+    public ModelAndView saveUser(@ModelAttribute @Validated User user, BindingResult bindingResult) {
+        ModelAndView model = new ModelAndView();
         if (bindingResult.hasErrors()) {
-            return "/user/user";
+            model.addObject("roles", getRolesAsMap());
+            model.setViewName("/user/user");
+            return model;
         }
         try {
             if (user.getId() != null) {
@@ -56,9 +59,12 @@ public class UserController {
             bindingResult.addError(new ObjectError("user", e.getMessage()));
         }
         if (bindingResult.hasErrors()) {
-            return "/user/user";
+            model.addObject("roles", getRolesAsMap());
+            model.setViewName("/user/user");
+            return model;
         }
-        return "redirect:/user/users";
+        model.setViewName("redirect:/user/users");
+        return model;
     }
 
     @GetMapping(value = "/user/new")
