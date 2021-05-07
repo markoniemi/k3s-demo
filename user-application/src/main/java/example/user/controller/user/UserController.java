@@ -44,9 +44,9 @@ public class UserController {
     @PostMapping(value = "/user/save")
     public ModelAndView saveUser(@ModelAttribute @Validated User user, BindingResult bindingResult) {
         ModelAndView model = new ModelAndView();
+        model.addObject("roles", getRolesAsMap());
+        model.setViewName("/user/user");
         if (bindingResult.hasErrors()) {
-            model.addObject("roles", getRolesAsMap());
-            model.setViewName("/user/user");
             return model;
         }
         try {
@@ -56,11 +56,7 @@ public class UserController {
                 userService.create(user);
             }
         } catch (Exception e) {
-            bindingResult.addError(new ObjectError("user", e.getMessage()));
-        }
-        if (bindingResult.hasErrors()) {
-            model.addObject("roles", getRolesAsMap());
-            model.setViewName("/user/user");
+            bindingResult.reject(e.getMessage());
             return model;
         }
         model.setViewName("redirect:/user/users");
