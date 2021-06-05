@@ -13,5 +13,9 @@ configMapGenerator:
     - application.properties
     - bootstrap.yml
     - log4j2.xml
+- name: migrate-db
+  files:
+    - sql/V001.sql
+    - sql/V002.sql
 commonLabels:
   app: user-repository

@@ -7,6 +7,9 @@ spec:
       matchLabels:
         app: user-repository
   replicas: 1
+  strategy:
+    # use Recreate strategy if older version of app is not compatible with new db
+    type: Recreate
   template:
     metadata:
       labels:
@@ -42,3 +45,21 @@ spec:
             initialDelaySeconds: 30
             periodSeconds: 3                
             failureThreshold: 2
+      initContainers:
+      - name: user-repository-migrate-db
+        image: flyway/flyway
+        args: ['info','migrate','info','-baselineOnMigrate=true']
+        env:
+        - name: FLYWAY_LOCATIONS
+          value: 'filesystem:/flyway/sql'
+        envFrom:
+          - configMapRef:
+              name: user-repository
+        volumeMounts:
+        - name: flyway-sql
+          mountPath: /flyway/sql
+      volumes:
+      - name: flyway-sql
+        configMap:
+          name: migrate-db
+            
