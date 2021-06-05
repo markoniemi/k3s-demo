@@ -4,5 +4,3 @@ metadata:
   name: user-repository
 data:  
   FLYWAY_URL: jdbc:postgresql://postgresql:5432/postgres
-  FLYWAY_USER: postgres
-  FLYWAY_PASSWORD: mysecretpassword

@@ -55,6 +55,8 @@ spec:
         envFrom:
           - configMapRef:
               name: user-repository
+          - secretRef:
+              name: user-repository
         volumeMounts:
         - name: flyway-sql
           mountPath: /flyway/sql
