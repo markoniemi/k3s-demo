@@ -1,6 +1,8 @@
 set -e
-echo create cluster
+echo run k3d
 k3d cluster create --config k3d-default.yaml
+
+export KUBECONFIG=~/.kube/config
 
 echo create user
 kubectl apply -f default-user-role.yaml
