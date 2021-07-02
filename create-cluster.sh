@@ -9,7 +9,7 @@ echo add repos
 helm repo add bitnami https://charts.bitnami.com/bitnami
 # docker registry
 #helm repo add twuni https://helm.twun.io
-#helm repo update
+helm repo update
 
 echo install postgresql in cluster
 helm install postgresql bitnami/postgresql -f cluster/postgresql.yaml
