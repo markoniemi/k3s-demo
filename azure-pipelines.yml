@@ -6,9 +6,11 @@ pool:
   vmImage: 'Ubuntu-20.04'
 
 variables:
-  group: tokens
-  MAVEN_CACHE_FOLDER: $(Pipeline.Workspace)/.m2/repository
-  MAVEN_OPTS: '-Dmaven.repo.local=$(MAVEN_CACHE_FOLDER)'
+- group: tokens
+- name: MAVEN_CACHE_FOLDER
+  value: $(Pipeline.Workspace)/.m2/repository
+- name: MAVEN_OPTS
+  value: '-Dmaven.repo.local=$(MAVEN_CACHE_FOLDER)'
 
 steps:
 - task: Cache@2
@@ -28,4 +30,4 @@ steps:
     jdkArchitectureOption: 'x64'
     publishJUnitResults: true
     testResultsFiles: '**/surefire-reports/TEST-*.xml'
-    goals: '-B clean org.jacoco:jacoco-maven-plugin:prepare-agent package verify'
+    goals: '-B clean org.jacoco:jacoco-maven-plugin:prepare-agent package verify sonar:sonar -Dsonar.login=$(SONAR_CLOUD_TOKEN) -Dsonar.organization=markoniemi-github -Dsonar.host.url=https://sonarcloud.io'
