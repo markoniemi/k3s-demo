@@ -1,10 +1,11 @@
 package example;
 
+import static org.junit.jupiter.api.Assertions.assertTrue;
+
 import java.util.Collections;
 
-import org.junit.Assert;
-import org.junit.Test;
-import org.junit.runner.RunWith;
+import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.extension.ExtendWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.autoconfigure.ImportAutoConfiguration;
 import org.springframework.boot.autoconfigure.http.HttpMessageConvertersAutoConfiguration;
@@ -21,8 +22,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.test.context.ActiveProfiles;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.ContextHierarchy;
-import org.springframework.test.context.TestPropertySource;
-import org.springframework.test.context.junit4.SpringRunner;
+import org.springframework.test.context.junit.jupiter.SpringExtension;
 
 import config.IntegrationTestConfig;
 import example.repository.UserRepositoryApplication;
@@ -32,7 +32,7 @@ import lombok.extern.log4j.Log4j2;
  * Base class for integration tests, enables running multiple tests
  * with @SpringBootTest
  */
-@RunWith(SpringRunner.class)
+@ExtendWith(SpringExtension.class)
 // comment @SpringBootTest and uncomment @EnableFeignClients when application is already running
 @SpringBootTest(classes = UserRepositoryApplication.class, webEnvironment = SpringBootTest.WebEnvironment.DEFINED_PORT)
 //@EnableFeignClients(basePackages = { "example.user.service" })
@@ -47,7 +47,7 @@ public class AbstractIntegrationTestBase {
 
     @Test
     public void dummy() {
-        Assert.assertTrue(true);
+        assertTrue(true);
     }
 
     protected String get(String url, MediaType mediaType) {
@@ -58,7 +58,7 @@ public class AbstractIntegrationTestBase {
         ResponseEntity<String> response = new TestRestTemplate().exchange(url, HttpMethod.GET,
                 new HttpEntity<>(headers), String.class);
         log.debug(response.getBody());
-        Assert.assertTrue(response.getStatusCode() == HttpStatus.OK);
+        assertTrue(response.getStatusCode() == HttpStatus.OK);
         return response.getBody();
     }
 }
