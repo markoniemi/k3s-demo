@@ -2,6 +2,7 @@ package example;
 
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
+import java.net.http.HttpClient;
 import java.util.Collections;
 
 import org.junit.jupiter.api.Test;
@@ -35,12 +36,10 @@ import lombok.extern.log4j.Log4j2;
 @ExtendWith(SpringExtension.class)
 // comment @SpringBootTest and uncomment @EnableFeignClients when application is already running
 @SpringBootTest(classes = UserRepositoryApplication.class, webEnvironment = SpringBootTest.WebEnvironment.DEFINED_PORT)
-//@EnableFeignClients(basePackages = { "example.user.service" })
 @ContextHierarchy(@ContextConfiguration(classes = IntegrationTestConfig.class))
 @ActiveProfiles("h2")
 @Log4j2
 @ImportAutoConfiguration({ FeignAutoConfiguration.class, HttpMessageConvertersAutoConfiguration.class })
-//@TestPropertySource("classpath:application-h2.properties")
 public class AbstractIntegrationTestBase {
     @Autowired
     protected Environment environment;
@@ -48,17 +47,5 @@ public class AbstractIntegrationTestBase {
     @Test
     public void dummy() {
         assertTrue(true);
-    }
-
-    protected String get(String url, MediaType mediaType) {
-        HttpHeaders headers = new HttpHeaders();
-        if (mediaType != null) {
-            headers.setAccept(Collections.singletonList(mediaType));
-        }
-        ResponseEntity<String> response = new TestRestTemplate().exchange(url, HttpMethod.GET,
-                new HttpEntity<>(headers), String.class);
-        log.debug(response.getBody());
-        assertTrue(response.getStatusCode() == HttpStatus.OK);
-        return response.getBody();
     }
 }
