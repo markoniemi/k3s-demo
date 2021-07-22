@@ -66,6 +66,9 @@
               </execution>
             </executions>
             <configuration>
+    <from>                           
+        <image>gcr.io/distroless/java:11</image>
+    </from>            
               <to>
                 <image>${docker.image.prefix}/${project.artifactId}</image>
               </to>
