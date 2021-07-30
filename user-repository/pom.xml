@@ -24,70 +24,31 @@
           </execution>
         </executions>
       </plugin>
+      <plugin>
+        <groupId>com.google.cloud.tools</groupId>
+        <artifactId>jib-maven-plugin</artifactId>
+        <configuration>
+          <from>
+            <image>gcr.io/distroless/java:11</image>
+          </from>
+          <to>
+            <image>${docker.image.prefix}/${project.artifactId}</image>
+          </to>
+          <container>
+            <ports>
+              <port>8082</port>
+              <port>8582</port>
+            </ports>
+            <environment>
+              <DB_HOST>postgresql</DB_HOST>
+              <DB_PASSWORD>mysecretpassword</DB_PASSWORD>
+              <PORT>8082</PORT>
+            </environment>
+          </container>
+        </configuration>
+      </plugin>
     </plugins>
   </build>
-  <profiles>
-    <profile>
-      <id>docker</id>
-      <build>
-        <plugins>
-          <plugin>
-            <groupId>org.apache.maven.plugins</groupId>
-            <artifactId>maven-dependency-plugin</artifactId>
-            <executions>
-              <execution>
-                <id>unpack</id>
-                <phase>package</phase>
-                <goals>
-                  <goal>unpack</goal>
-                </goals>
-                <configuration>
-                  <artifactItems>
-                    <artifactItem>
-                      <groupId>${project.groupId}</groupId>
-                      <artifactId>${project.artifactId}</artifactId>
-                      <version>${project.version}</version>
-                    </artifactItem>
-                  </artifactItems>
-                </configuration>
-              </execution>
-            </executions>
-          </plugin>
-          <plugin>
-            <groupId>com.google.cloud.tools</groupId>
-            <artifactId>jib-maven-plugin</artifactId>
-            <executions>
-              <execution>
-                <phase>package</phase>
-                <goals>
-                  <goal>buildTar</goal>
-                </goals>
-              </execution>
-            </executions>
-            <configuration>
-              <from>
-                <image>gcr.io/distroless/java:11</image>
-              </from>
-              <to>
-                <image>${docker.image.prefix}/${project.artifactId}</image>
-              </to>
-              <container>
-                <ports>
-                  <port>8082</port>
-                  <port>8582</port>
-                </ports>
-                <environment>
-                  <DB_HOST>postgresql</DB_HOST>
-                  <DB_PASSWORD>mysecretpassword</DB_PASSWORD>
-                  <PORT>8082</PORT>
-                </environment>
-              </container>
-            </configuration>
-          </plugin>
-        </plugins>
-      </build>
-    </profile>
-  </profiles>
   <dependencies>
     <dependency>
       <groupId>org.k3s.demo</groupId>

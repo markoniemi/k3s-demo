@@ -47,7 +47,7 @@ spec:
             failureThreshold: 2
       initContainers:
       - name: user-repository-migrate-db
-        image: flyway/flyway:latest-alpine
+        image: flyway/flyway:7.12-alpine
         args: ['info','migrate','info','-baselineOnMigrate=true']
         env:
         - name: FLYWAY_LOCATIONS

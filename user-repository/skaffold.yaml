@@ -1,22 +1,29 @@
-apiVersion: skaffold/v2beta13
+apiVersion: skaffold/v2beta19
 kind: Config
 metadata:
   name: user-repository
 build:
-  local:
-    push: false 
   artifacts:
-    - image: markoniemi/user-repository
-      context: .
-      jib:
-        type: maven 
-        args:
-          - "jib:buildTar"
+  - image: markoniemi/user-repository
+    jib:
+      project: org.k3s.demo:user-repository
 deploy:
   kustomize:
-    paths: 
-      - k8s/dev
-
-
-
-    
+    paths:
+    - k8s\dev
+profiles:
+- name: base
+  deploy:
+    kustomize:
+      paths:
+      - k8s\base
+- name: external-db
+  deploy:
+    kustomize:
+      paths:
+      - k8s\external-db
+- name: external-user-repository
+  deploy:
+    kustomize:
+      paths:
+      - k8s\external-user-repository
