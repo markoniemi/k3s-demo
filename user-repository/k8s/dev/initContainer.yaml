@@ -1,0 +1,26 @@
+kind: Deployment
+apiVersion: apps/v1
+metadata:
+  name: user-repository
+spec:
+  template:
+    spec:
+      initContainers:
+      - name: user-repository-migrate-db
+        image: flyway/flyway:7.12-alpine
+        args: ['info','migrate','info','-baselineOnMigrate=true']
+        env:
+        - name: FLYWAY_LOCATIONS
+          value: 'filesystem:/flyway/sql'
+        envFrom:
+          - configMapRef:
+              name: user-repository
+          - secretRef:
+              name: user-repository
+        volumeMounts:
+        - name: flyway-sql
+          mountPath: /flyway/sql
+      volumes:
+      - name: flyway-sql
+        configMap:
+          name: migrate-db
