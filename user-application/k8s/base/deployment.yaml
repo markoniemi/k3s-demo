@@ -37,3 +37,7 @@ spec:
             initialDelaySeconds: 10
             periodSeconds: 3                
             failureThreshold: 2
+          resources:
+            requests:
+              memory: 512M
+            

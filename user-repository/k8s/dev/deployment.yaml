@@ -15,3 +15,6 @@ spec:
           env:
           - name: JAVA_TOOL_OPTIONS
             value: "-agentlib:jdwp=transport=dt_socket,server=y,suspend=n,address=0.0.0.0:8582"
+          resources:
+            requests:
+              memory: 512M
