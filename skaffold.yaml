@@ -1,13 +1,17 @@
 apiVersion: skaffold/v2beta19
 kind: Config
 metadata:
-  name: user-application
+  name: k3s-demo
 build:
   artifacts:
   - image: markoniemi/user-application
     jib:
       project: org.k3s.demo:user-application
+  - image: markoniemi/user-repository
+    jib:
+      project: org.k3s.demo:user-repository
 deploy:
   kustomize:
     paths:
-    - k8s\base
+    - user-repository\k8s\dev
+    - user-application\k8s\base

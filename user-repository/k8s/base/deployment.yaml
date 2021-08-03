@@ -9,7 +9,7 @@ spec:
   replicas: 1
   strategy:
     # use Recreate strategy if older version of app is not compatible with new db
-    type: Recreate
+    #type: Recreate
   template:
     metadata:
       labels:
@@ -36,12 +36,12 @@ spec:
             httpGet:
               path: /actuator/health/liveness
               port: 8082
-            initialDelaySeconds: 30
-            periodSeconds: 3                
+            initialDelaySeconds: 10
+            periodSeconds: 3
           readinessProbe:
             httpGet:
               path: /actuator/health/readiness
               port: 8082
-            initialDelaySeconds: 30
-            periodSeconds: 3                
+            initialDelaySeconds: 10
+            periodSeconds: 3
             failureThreshold: 2
