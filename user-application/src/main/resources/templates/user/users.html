@@ -28,15 +28,15 @@
               <td id="email" th:text="${user.email}"></td>
               <td id="role" th:text="#{${user.role}}"></td>
               <td>
-                <form:form class="form-horizontal" method="POST">
+                <form class="form-horizontal" method="POST">
                   <a th:href="@{${user.username}}" id="edit" class="btn btn-primary">
                     <span class="bi bi-pencil-square"></span>
                   </a>
                   <button id="delete" class="btn btn-primary" type="submit"
-                    th:formaction="@{'user/delete/' + ${user.username}}">
+                    th:formaction="@{'/user/delete/' + ${user.username}}">
                     <span class="bi bi-trash-fill"></span>
                   </button>
-                </form:form>
+                </form>
               </td>
             </tr>
           </c:forEach>
