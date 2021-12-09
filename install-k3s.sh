@@ -15,6 +15,7 @@ sudo chmod a+r /etc/rancher/k3s/config.yaml
 echo install k3s
 sudo curl -sfL https://get.k3s.io | sh -
 
+# TODO wait for the k3s.yaml to update
 echo copy k3s.yaml to .kube/config
 mkdir -p $HOME/.kube
 cp /etc/rancher/k3s/k3s.yaml $HOME/.kube/config

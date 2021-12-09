@@ -1,0 +1,9 @@
+controller:
+  hostNetwork: false
+  extraArgs:
+    watch-ingress-without-class: true
+  containerPort:
+    https: 7443
+  service:
+    enableHttps: false    
+  

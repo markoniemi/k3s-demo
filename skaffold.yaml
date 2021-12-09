@@ -3,6 +3,8 @@ kind: Config
 metadata:
   name: k3s-demo
 build:
+  insecureRegistries:
+  - localhost
   artifacts:
   - image: markoniemi/user-application
     jib:

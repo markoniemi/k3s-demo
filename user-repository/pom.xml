@@ -46,6 +46,15 @@
             </environment>
           </container>
         </configuration>
+        <executions>
+          <execution>
+            <id>package</id>
+            <phase>package</phase>
+            <goals>
+              <goal>buildTar</goal>
+            </goals>
+          </execution>
+        </executions>
       </plugin>
     </plugins>
   </build>
