@@ -1,0 +1,40 @@
+apiVersion: k3d.io/v1alpha3
+kind: Simple
+servers: 1
+#image: docker.io/rancher/k3s:v1.21.1+k3s1
+ports:
+  - port: 80:80
+    nodeFilters:
+      - loadbalancer
+  - port: 9000:9000
+    nodeFilters:
+      - loadbalancer
+  - port: 8080:8080
+    nodeFilters:
+      - loadbalancer
+  - port: 8082:8082
+    nodeFilters:
+      - loadbalancer
+  - port: 5000:5000
+    nodeFilters:
+      - loadbalancer
+#  - port: 8582:30082
+#    nodeFilters:
+#      - server[0]
+#  - port: 8583:30083
+#    nodeFilters:
+#      - server[0]
+options:
+  k3s:
+    extraArgs:
+      - arg: "--no-deploy=traefik,metrics-server"
+        nodeFilters:
+          - server:*
+  kubeconfig:
+    updateDefaultKubeconfig: true    
+kubeAPI:
+  hostIP: "127.0.0.1"
+  hostPort: "6443"
+registries:
+  create:
+    name: registry.localhost

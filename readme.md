@@ -1,14 +1,15 @@
-# k3s Traefik Consul demo
+# k3s Traefik SpringBoot demo
 
 ## Prerequisites
 
 1. install docker
-2. install kubectl
-3. install k3d > 3.4.0
-4. install lens (optional)
-5. install skaffold (optional)
+2. install k9s (optional)
+
+## Install k3s
+
+    ./install-k3s.sh
   
-## Create cluster, install Traefik, Consul, Portainer
+## Create cluster, install Traefik, PostGRE
 
     ./create_cluster.sh
 
@@ -16,8 +17,7 @@
 
     kubectl get pod --all-namespaces
 
-1. Start Lens, add ~/.kube/config to Lens.
-2. Wait until all pods are running
+or start k9s
 
 ## Build services
 
@@ -30,7 +30,7 @@
     
 If something goes wrong, just delete the cluster and start again.
 
-    k3d cluster delete k3s-default
+    ./uninstall-k3s.sh
     
 ## Verify installation
 

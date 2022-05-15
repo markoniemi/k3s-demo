@@ -14,5 +14,6 @@ sudo curl -sfL https://get.k3s.io | sh -
 #sudo curl -sfL https://get.k3s.io | sh -s - --docker
 
 echo link  .kube/config to k3s.yaml
+mkdir $HOME/.kube
 ln -sf /etc/rancher/k3s/k3s.yaml $HOME/.kube/config
 

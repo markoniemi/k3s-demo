@@ -14,10 +14,15 @@ helm repo add haproxy-ingress https://haproxy-ingress.github.io/charts
 helm repo update
 
 echo install haproxy
-helm install haproxy-ingress haproxy-ingress/haproxy-ingress --namespace kube-system --values cluster/haproxy-values.yaml
+helm install haproxy-ingress haproxy-ingress/haproxy-ingress --namespace kube-system -f cluster/haproxy-values.yaml
 
 echo install postgresql in cluster
 helm install postgresql bitnami/postgresql -f cluster/postgresql.yaml
+# postgre helm has a bug with secret 
+kubectl apply -f cluster/postgresql-secret.yaml
+# to uninstall:
+# helm uninstall postgresql
+# kubectl delete pvc data-postgresql-0
 
 #echo install docker registry
 #helm install docker-registry twuni/docker-registry -f cluster/docker-registry.yaml

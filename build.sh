@@ -1,5 +1,5 @@
 # build only one module:
-# ./build -pl user-repository -am
+# ./build.sh -pl user-repository -am
 
 docker run \
 -it --rm \
@@ -7,7 +7,8 @@ docker run \
 -v "$PWD":/usr/src \
 -v "$HOME/.m2":/root/.m2 \
 -w /usr/src \
-maven:3.6-jdk-8-alpine \
+maven:3.8-eclipse-temurin-11-alpine \
 mvn package -DskipTests=true -P docker "$@"
-docker load -i user-repository/target/jib-image.tar
-docker load -i user-application/target/jib-image.tar
+
+#docker load -i user-repository/target/jib-image.tar
+#docker load -i user-application/target/jib-image.tar
