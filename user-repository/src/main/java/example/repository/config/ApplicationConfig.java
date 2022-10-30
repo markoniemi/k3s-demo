@@ -12,7 +12,7 @@ import org.springframework.web.servlet.config.annotation.EnableWebMvc;
 @ComponentScan(basePackages = "example")
 @EnableWebMvc
 @EnableRetry
-@Import({ DiscoveryClientConfig.class, UserRepositoryConfig.class })
+@Import({ UserRepositoryConfig.class })
 public class ApplicationConfig {
     @Bean
     public CommonsRequestLoggingFilter requestLoggingFilter() {
