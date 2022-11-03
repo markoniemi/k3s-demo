@@ -2,11 +2,19 @@
 #postgresqlUsername: postgres
 #postgresqlPassword: mysecretpassword
 
-global:
-  postgresql:
-    postgresqlPassword: mysecretpassword
-    postgresqlUsername: postgres
-    postgresqlDatabase: postgres
+auth:
+  postgresPassword: mysecretpassword
+  password: mysecretpassword
+  username: postgres
+  database: postgres
+
+#global:
+#  postgresql:
+#    auth:
+#      postgresPassword: mysecretpassword
+#      password: mysecretpassword
+#      username: postgres
+#      database: postgres
 
 #service.nodePort: 30432
 #service.type: LoadBalancer

@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/bin/sh
 set -e
 
 echo create user
@@ -10,11 +10,11 @@ helm repo add bitnami https://charts.bitnami.com/bitnami
 # docker registry
 #helm repo add twuni https://helm.twun.io
 # haproxy
-helm repo add haproxy-ingress https://haproxy-ingress.github.io/charts
-helm repo update
+#helm repo add haproxy-ingress https://haproxy-ingress.github.io/charts
+#helm repo update
 
-echo install haproxy
-helm install haproxy-ingress haproxy-ingress/haproxy-ingress --namespace kube-system -f cluster/haproxy-values.yaml
+#echo install haproxy
+#helm install haproxy-ingress haproxy-ingress/haproxy-ingress --namespace kube-system -f cluster/haproxy-values.yaml
 
 echo install postgresql in cluster
 helm install postgresql bitnami/postgresql -f cluster/postgresql.yaml

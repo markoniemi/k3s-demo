@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/bin/ash
 
 /usr/local/bin/k3s-killall.sh
 sudo systemctl stop k3s
