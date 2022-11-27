@@ -8,8 +8,8 @@
   <version>0.1-SNAPSHOT</version>
   <properties>
     <java.version>11</java.version>
-    <spring-cloud.version>2020.0.3</spring-cloud.version>
-    <spring.boot.version>2.4.8</spring.boot.version>
+    <spring-cloud.version>2021.0.3</spring-cloud.version>
+    <spring.boot.version>2.7.5</spring.boot.version>
     <jacoco.maven.plugin.version>0.8.7</jacoco.maven.plugin.version>
     <bootstrap.version>4.6.0-1</bootstrap.version>
     <jquery.version>3.6.0</jquery.version>
@@ -69,7 +69,7 @@
         <plugin>
           <groupId>com.google.cloud.tools</groupId>
           <artifactId>jib-maven-plugin</artifactId>
-          <version>3.1.2</version>
+          <version>3.3.1</version>
         </plugin>
       </plugins>
     </pluginManagement>
