@@ -1,7 +1,7 @@
 echo start k3s
 #sudo systemctl enable k3s
 #sudo systemctl start k3s
-sudo k3s server > /dev/null 2>&1 & 
+sudo k3s server > /var/log/k3s.log 2>&1 & 
 sleep 5
 sudo chmod a+r /etc/rancher/k3s/k3s.yaml
 

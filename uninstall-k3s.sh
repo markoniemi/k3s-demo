@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/bin/ash
 
 echo uninstall k3s
 /usr/local/bin/k3s-uninstall.sh

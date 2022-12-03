@@ -1,5 +1,6 @@
 # bind-address must be virtualbox host
-bind-address: 10.0.2.15
+#bind-address: 10.0.2.15
 #bind-address: localhost
+#bind-address: host.docker.internal
 write-kubeconfig-mode: 644
-no-deploy: traefik,metrics-server
+disable: metrics-server

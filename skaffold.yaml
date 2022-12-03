@@ -1,19 +1,45 @@
-apiVersion: skaffold/v2beta19
+apiVersion: skaffold/v2beta26
 kind: Config
 metadata:
   name: k3s-demo
 build:
-  insecureRegistries:
-  - localhost
+#  local:
+#    push: false
   artifacts:
-  - image: markoniemi/user-application
-    jib:
-      project: org.k3s.demo:user-application
   - image: markoniemi/user-repository
     jib:
-      project: org.k3s.demo:user-repository
+      project: user-repository
+      type: maven
+#      args: 
+#      - --no-transfer-progress
+#      - -Psync
+#    sync:
+#      auto: true
+
+#    custom:
+#      buildCommand: mvn package -pl user-repository -am
+#  - image: markoniemi/user-application
+#    custom:
+#      buildCommand: mvn package -pl user-application -am
+#  insecureRegistries:
+#  - localhost
+#  artifacts:
+#  - image: markoniemi/user-application
+#    jib:
+#      project: org.k3s.demo:user-application
+#  - image: markoniemi/user-repository
+#    jib:
+#      project: org.k3s.demo:user-repository
+#  - image: markoniemi/user-repository
+#    jib:
+#      project: org.k3s.demo:user-repository
 deploy:
   kustomize:
+#    hooks:
+#      before:
+#        - host:
+#            command: ["sudo", "k3s", "ctr", "images", "import", "user-repository/target/jib-image.tar"]
     paths:
-    - user-repository\k8s\dev
-    - user-application\k8s\base
+    - user-repository/k8s/dev
+#    - user-application/k8s/base
+    
