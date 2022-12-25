@@ -14,7 +14,6 @@
     <bootstrap.version>4.6.0-1</bootstrap.version>
     <jquery.version>3.6.0</jquery.version>
     <maven.cargo.version>1.6.5</maven.cargo.version>
-    <selenium.version>3.13.0</selenium.version>
     <docker.image.prefix>markoniemi</docker.image.prefix>
     <timestamp>${maven.build.timestamp}</timestamp>
   </properties>
@@ -122,13 +121,6 @@
         <groupId>org.springframework.boot</groupId>
         <artifactId>spring-boot-starter-log4j2</artifactId>
         <version>${spring.boot.version}</version>
-      </dependency>
-      <dependency>
-        <groupId>org.jboss.arquillian.selenium</groupId>
-        <artifactId>selenium-bom</artifactId>
-        <version>${selenium.version}</version>
-        <type>pom</type>
-        <scope>import</scope>
       </dependency>
       <!-- Bootstrap -->
       <dependency>
