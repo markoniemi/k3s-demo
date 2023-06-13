@@ -20,6 +20,7 @@ public class SeleniumConfig {
         options.addArguments("no-sandbox");
         options.addArguments("proxy-server='direct://'");
         options.addArguments("proxy-bypass-list=*");
+        options.addArguments("remote-allow-origins=*");        
         ChromeDriver chromeDriver = new ChromeDriver(options);
         chromeDriver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
         return chromeDriver;
