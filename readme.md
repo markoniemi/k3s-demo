@@ -1,5 +1,10 @@
 # k3s Traefik SpringBoot demo
 
+<a href="https://dev.azure.com/markoniemi/markoniemi/_build?definitionId=17">
+<image src="https://dev.azure.com/markoniemi/markoniemi/_apis/build/status/markoniemi.k3s-demo?branchName=master"/>
+</a>
+
+
 ## Prerequisites
 
 1. install docker
