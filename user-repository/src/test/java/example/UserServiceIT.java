@@ -1,7 +1,6 @@
 package example;
 
 import static example.RestClient.get;
-import static example.RestClient.parseList;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
 
@@ -17,6 +16,7 @@ import com.fasterxml.jackson.databind.JsonMappingException;
 
 import example.repository.user.User;
 import example.service.user.UserClient;
+import io.restassured.common.mapper.TypeRef;
 
 public class UserServiceIT extends AbstractIntegrationTestBase {
     @Resource
@@ -25,7 +25,7 @@ public class UserServiceIT extends AbstractIntegrationTestBase {
     private UserClient userClient;
     @Test
     public void getUsersRest() throws JsonParseException, JsonMappingException, IOException {
-        List<User> users = parseList(get(url + "/api/rest/users/v1"), User.class);
+        List<User> users = get(url + "/api/rest/users/v1", userListType());
         assertNotNull(users);
         assertEquals(1, users.size());
     }
@@ -42,4 +42,8 @@ public class UserServiceIT extends AbstractIntegrationTestBase {
         assertNotNull(users);
         assertEquals(1, users.length);
     }
+	private TypeRef<List<User>> userListType() {
+		return new TypeRef<List<User>>() {
+		};
+	}
 }

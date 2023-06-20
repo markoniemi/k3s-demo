@@ -1,50 +1,60 @@
 package example;
 
-import static org.junit.jupiter.api.Assertions.assertTrue;
+import static io.restassured.RestAssured.given;
+import static org.springframework.http.HttpStatus.OK;
 
-import java.util.List;
+import java.util.Arrays;
 
-import org.springframework.boot.test.web.client.TestRestTemplate;
-import org.springframework.http.HttpMethod;
 import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
 
-import com.fasterxml.jackson.core.JsonProcessingException;
-import com.fasterxml.jackson.core.type.TypeReference;
-import com.fasterxml.jackson.databind.JsonMappingException;
-import com.fasterxml.jackson.databind.ObjectMapper;
+import io.restassured.common.mapper.TypeRef;
+import io.restassured.http.Header;
+import io.restassured.http.Headers;
 
 public class RestClient {
-    public static String get(String url) {
-        return get(url, HttpStatus.OK);
-    }
+	public static String get(String url) {
+		return given().get(url).then().statusCode(HttpStatus.OK.value()).log().ifError().extract().asString();
+	}
 
-    public static String get(String url, HttpStatus httpStatus) {
-        return execute(HttpMethod.GET, url, httpStatus, String.class).getBody();
-    }
+	public static <T> T get(String url, TypeRef<T> typeRef) {
+		return get(url, typeRef, OK);
+	}
 
-    public static <T> T get(String url, Class<T> responseType) {
-        return execute(HttpMethod.GET, url, HttpStatus.OK, responseType).getBody();
-    }
+	public static <T> T get(String url, TypeRef<T> typeRef, HttpStatus httpStatus) {
+		return given().get(url).then().statusCode(httpStatus.value()).log().ifError().extract().as(typeRef.getType());
+	}
 
-    public static String post(String url) {
-        return post(url, HttpStatus.OK);
-    }
+	public static <T> T get(String url, Class<T> clazz) {
+		return get(url, clazz, OK);
+	}
 
-    public static String post(String url, HttpStatus httpStatus) {
-        return execute(HttpMethod.POST, url, httpStatus, String.class).getBody();
-    }
+	public static <T> T get(String url, Class<T> clazz, HttpStatus httpStatus) {
+		return given().get(url).then().statusCode(httpStatus.value()).log().ifError().extract().as(clazz);
+	}
 
-    private static <T> ResponseEntity<T> execute(HttpMethod httpMethod, String url, HttpStatus httpStatus,
-            Class<T> responseType) {
-        ResponseEntity<T> response = new TestRestTemplate().exchange(url, httpMethod, null, responseType);
-        assertTrue(response.getStatusCode() == httpStatus, response.getStatusCode().toString());
-        return response;
-    }
+	public static <T> T post(String url, Object body, Class<T> clazz) {
+		return post(url, body, clazz, OK);
+	}
 
-    public static <T> List<T> parseList(String json, Class<T> listType)
-            throws JsonMappingException, JsonProcessingException {
-        return new ObjectMapper().readValue(json, new TypeReference<List<T>>() {
-        });
-    }
+	public static <T> T post(String url, Object body, Class<T> clazz, HttpStatus httpStatus) {
+		return given().body(body).post(url).then().statusCode(httpStatus.value()).log().ifError().extract().as(clazz);
+	}
+
+	public static <T> T post(String url, String body, TypeRef<T> typeRef, HttpStatus httpStatus) {
+		return given().body(body).post(url).then().statusCode(httpStatus.value()).log().ifError().extract().as(typeRef);
+	}
+
+	public static <T> T put(String url, String body, TypeRef<T> typeRef, HttpStatus httpStatus) {
+		return given().body(body).put(url).then().statusCode(httpStatus.value()).log().ifError().extract().as(typeRef);
+	}
+
+	public static void delete(String url, HttpStatus httpStatus) {
+		given().delete(url).then().statusCode(httpStatus.value()).log().ifError();
+
+	}
+
+	private static Headers createHeaders(String token) {
+		return new Headers(Arrays.asList(new Header("Authorization", "Bearer " + token),
+				new Header("Content-Type", "application/json"), new Header("Accept", "application/json")));
+	}
 }
