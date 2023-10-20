@@ -13,6 +13,10 @@
 ## Install k3s
 
     ./install-k3s.sh
+
+## Start k3s
+
+    ./start-k3s.sh
   
 ## Create cluster, install Traefik, PostGRE
 

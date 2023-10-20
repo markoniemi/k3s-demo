@@ -1,9 +1,7 @@
 package example.repository.config;
 
-import javax.servlet.http.HttpServletRequest;
-
 import org.springframework.web.filter.CommonsRequestLoggingFilter;
-
+import jakarta.servlet.http.HttpServletRequest;
 import lombok.Getter;
 import lombok.Setter;
 

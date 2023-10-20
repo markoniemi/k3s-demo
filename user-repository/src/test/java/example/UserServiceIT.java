@@ -10,7 +10,7 @@ import java.util.List;
 import javax.annotation.Resource;
 
 import org.junit.jupiter.api.Test;
-
+import org.springframework.beans.factory.annotation.Autowired;
 import com.fasterxml.jackson.core.JsonParseException;
 import com.fasterxml.jackson.databind.JsonMappingException;
 
@@ -19,9 +19,9 @@ import example.service.user.UserClient;
 import io.restassured.common.mapper.TypeRef;
 
 public class UserServiceIT extends AbstractIntegrationTestBase {
-    @Resource
+    @Autowired
     private String url;
-    @Resource
+    @Autowired
     private UserClient userClient;
     @Test
     public void getUsersRest() throws JsonParseException, JsonMappingException, IOException {
