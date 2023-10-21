@@ -70,7 +70,7 @@
               <goal>exec</goal>
             </goals>
             <configuration>
-              <executable>${JAVA_HOME}/bin/java</executable>
+              <executable>java</executable>
               <workingDirectory>../user-repository/target</workingDirectory>
               <async>true</async>
               <asyncDestroyOnShutdown>true</asyncDestroyOnShutdown>
