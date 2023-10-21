@@ -43,7 +43,7 @@
         </executions>
         <configuration>
           <from>
-            <image>gcr.io/distroless/java:11</image>
+            <image>gcr.io/distroless/java:17</image>
           </from>
           <to>
             <image>${docker.image.prefix}/${project.artifactId}</image>
@@ -70,7 +70,7 @@
               <goal>exec</goal>
             </goals>
             <configuration>
-              <executable>java</executable>
+              <executable>${JAVA_HOME}/java</executable>
               <workingDirectory>../user-repository/target</workingDirectory>
               <async>true</async>
               <asyncDestroyOnShutdown>true</asyncDestroyOnShutdown>
