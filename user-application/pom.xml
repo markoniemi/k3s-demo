@@ -43,7 +43,7 @@
         </executions>
         <configuration>
           <from>
-            <image>gcr.io/distroless/java:17</image>
+            <image>openjdk:17-jdk-alpine</image>
           </from>
           <to>
             <image>${docker.image.prefix}/${project.artifactId}</image>
