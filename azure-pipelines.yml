@@ -23,9 +23,8 @@ steps:
   displayName: Cache Maven local repo
 - task: Maven@3
   inputs:
-    mavenVersionOption: 3.9.3
     mavenOptions: '-Xmx3072m $(MAVEN_OPTS)'
     javaHomeOption: 'JDKVersion'
     jdkVersionOption: '1.17'
     testResultsFiles: '**/surefire-reports/TEST-*.xml'
-    goals: '-B -X clean org.jacoco:jacoco-maven-plugin:prepare-agent package verify sonar:sonar -Dsonar.login=$(SONAR_CLOUD_TOKEN) -Dsonar.organization=markoniemi-github -Dsonar.host.url=https://sonarcloud.io'
+    goals: '-B clean org.jacoco:jacoco-maven-plugin:prepare-agent package verify sonar:sonar -Dsonar.login=$(SONAR_CLOUD_TOKEN) -Dsonar.organization=markoniemi-github -Dsonar.host.url=https://sonarcloud.io'
