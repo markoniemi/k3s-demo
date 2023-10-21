@@ -21,7 +21,7 @@ steps:
       maven
     path: $(MAVEN_CACHE_FOLDER)
   displayName: Cache Maven local repo
-- task: Maven@3
+- task: Maven@4
   inputs:
     mavenOptions: '-Xmx3072m $(MAVEN_OPTS)'
     javaHomeOption: 'JDKVersion'
